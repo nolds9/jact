@@ -65,6 +65,14 @@ $(document).ready(function (){
         this.updateState(this.state);
       }
     }
+    removeTask (index) {
+      if (this.state.tasks[index]) {
+        this.state.tasks = this.state.tasks.filter(function (task, i) {
+          if (i != index) { return task };
+        })
+        this.updateState(this.state);
+      }
+    }
     renderNewTaskForm () {
       this.state.showForm = true;
       this.updateState(this.state);
@@ -81,7 +89,7 @@ $(document).ready(function (){
       `<li class=${className}>
         <button data-task-index=${i} class='complete'>✓</button>
           ${task.title}
-        <button data-task-index=${i} class='complete'>✗</button>
+        <button data-task-index=${i} class='delete'>✗</button>
       </li>`;
       return html;
     }
