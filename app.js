@@ -1,4 +1,4 @@
-$(document).ready(function (){
+$(document).ready( () => {
   console.log('Ready, Set, Jact');
   class App {
     constructor() {
@@ -15,36 +15,34 @@ $(document).ready(function (){
     }
     listen () {
       // new task button
-      this.el.find('#new-task').on('click', function (e) {
+      this.el.find('#new-task').on('click', (e) => {
         e.preventDefault();
         if (!this.state.showForm) { this.renderNewTaskForm(); }
-      }.bind(this));
+      });
       // create form button
-      this.el.find('#create').on('click', function (e) {
+      this.el.find('#create').on('click', (e) => {
         e.preventDefault();
         let title = $('#title').val();
         this.addTask(title);
         this.state.showForm = false;
         this.updateState(this.state);
-      }.bind(this));
+      });
       // complete button
-      this.el.find('.complete').on('click', function (e) {
+      this.el.find('.complete').on('click', (e) => {
         e.preventDefault();
         this.completeTask(e.target.dataset.taskIndex);
-      }.bind(this));
+      });
       // delete button
-      this.el.find('.delete').on('click', function (e) {
+      this.el.find('.delete').on('click', (e) => {
         e.preventDefault();
         this.removeTask(e.target.dataset.taskIndex);
-      }.bind(this));
+      });
       // cancel form button
-      this.el.find('#cancel').on('click', function (e) {
-        console.log("clicked");
+      this.el.find('#cancel').on('click', (e) => {
         e.preventDefault();
         this.state.showForm = false;
-        this.state.newTask = "";
         this.updateState(this.state);
-      }.bind(this));
+      });
     }
     updateState (state) {
       this.state = Object.assign(this.state, state);
@@ -67,7 +65,7 @@ $(document).ready(function (){
     }
     removeTask (index) {
       if (this.state.tasks[index]) {
-        this.state.tasks = this.state.tasks.filter(function (task, i) {
+        this.state.tasks = this.state.tasks.filter( (task, i) =>  {
           if (i != index) { return task };
         })
         this.updateState(this.state);
@@ -95,9 +93,9 @@ $(document).ready(function (){
     }
     renderTasks () {
       let html = `<ul id='tasks'>`;
-      this.state.tasks.forEach(function (task, i) {
+      this.state.tasks.forEach( (task, i) => {
         html += this.renderTask(task, i);
-      }.bind(this));
+      });
       html += `</ul>`
       return html;
     }
